@@ -29,8 +29,7 @@
 * Make BOM
 
 ### Phase 1: Bare Necessities
-* Assemble Hardware
-* Display time
+* Display NTP synced time graphically
 
 ### Phase 2: Alarming Developemnt
 * Set a single one-off audible alarm
@@ -44,6 +43,7 @@
 * Add flexible alarm scheduling
 
 ### Phase 5: A Bright Idea
+* Assemble Hardware
 * Make sunrise lights
 * Trigger sunrise on alarm
 
