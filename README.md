@@ -6,4 +6,4 @@ Emulates a Raspberry Pi using qemu and a chroot.
 
 Based on a tutorial from [hackaday.com](http://hackaday.com/2016/05/20/need-a-raspberry-pi-right-now-maybe-you-have-one-needs-art/).
 
-Requires `qemu-user-static` package and root permissions.
+Requires `qemu-user-static` package, a RPi image, and root permissions.

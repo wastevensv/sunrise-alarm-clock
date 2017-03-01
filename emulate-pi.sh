@@ -23,6 +23,7 @@ elif [ "$1" == "enter" ]; then
 elif [ "$1" == "unmount" ]; then
     if [ -d $MOUNTPT ]; then
         sed -i 's/^#//g' $MOUNTPT/etc/ld.so.preload
+        rm $MOUNTPT/usr/bin/qemu-arm-static
         umount $MOUNTPT/{dev/pts,proc,sys,dev}
         umount $MOUNTPT/boot
         umount $MOUNTPT
