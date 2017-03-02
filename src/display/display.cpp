@@ -26,9 +26,17 @@ bool Display::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     cr->set_source_rgb(0.0, 0.0, 0.0);
     draw_rectangle(cr, rectangle_width, rectangle_height);
 
-    // and some white text
+    // Get the time.
+    time_t rawtime;
+    time(&rawtime);
+    struct tm * timeinfo = localtime (&rawtime);
+
+    char timestr[80];
+    strftime(timestr,80,"%a %b %d %r",timeinfo);
+
+    // Draw the time on the display
     cr->set_source_rgb(1.0, 1.0, 1.0);
-    draw_text(cr, rectangle_width, rectangle_height, "Hello World");
+    draw_text(cr, rectangle_width, rectangle_height, timestr);
     return true;
 }
 
