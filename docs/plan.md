@@ -39,17 +39,17 @@
 * Set a daily repeating alarm
 * Set a weekly repeating alarm
 
-### Phase 4: Be more Flexible
-* Add flexible alarm scheduling
-
-### Phase 5: A Bright Idea
+### Phase 4: A Bright Idea
 * Assemble Hardware
 * Make sunrise lights
 * Trigger sunrise on alarm
 
-### Phase 6: Make it Pretty
+### Phase 5: Make it Pretty
 * Design enclosure
 * Assemble enclosure
+
+### Phase 6: Be more Flexible
+* Add flexible alarm scheduling
 
 ### Phase 7: World Wide Wakeup
 * Make API for Alarm setting
