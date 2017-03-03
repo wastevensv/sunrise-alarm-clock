@@ -1,5 +1,5 @@
-TARGET=sunrise
-SOURCES=main.cpp display/display.cpp
+TARGET=alarm_demo
+SOURCES=demo.cpp alarm_mgr.cpp
 CPPFLAGS=-std=c++11
 
 all: ${TARGET}

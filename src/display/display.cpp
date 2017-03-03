@@ -29,7 +29,7 @@ bool Display::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     // Get the time.
     time_t rawtime;
     time(&rawtime);
-    struct tm * timeinfo = localtime (&rawtime);
+    struct tm* timeinfo = localtime(&rawtime);
 
     char timestr[80];
     strftime(timestr,80,"%a %b %d\n%r",timeinfo);
