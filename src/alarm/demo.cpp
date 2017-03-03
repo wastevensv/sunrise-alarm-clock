@@ -8,13 +8,13 @@ std::string active_alarm = "";
 
 void on_alarm_activated(std::string alarmid)
 {
-    std::cout << "Alarm " << alarmid  << "activated." << std::endl;
+    std::cout << "Alarm " << alarmid  << " activated." << std::endl;
     active_alarm = alarmid;
 }
 
 void on_alarm_deactivated(std::string alarmid)
 {
-    std::cout << "Alarm " << alarmid  << "deactivated." << std::endl;
+    std::cout << "Alarm " << alarmid  << " deactivated." << std::endl;
     active_alarm = "";
 }
 
@@ -29,8 +29,8 @@ int main(int argc, char* argv[])
         alarm_mgr.check_alarms();
         if(!active_alarm.empty()) {
             std::cout << "ALARM" << std::endl;
-            alarm_mgr.deactivate_alarm(active_alarm);
+            alarm_mgr.deactivate_alarm(active_alarm, true);
         }
-        sleep(10);
+        sleep(60);
     }
 }

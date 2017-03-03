@@ -4,18 +4,20 @@
 #include <string>
 #include <ctime>
 #include <sigc++/sigc++.h>
+#include <sqlite/connection.hpp>
 
 class AlarmMgr
 {
     public:
         AlarmMgr();
+        AlarmMgr(std::string alarmdb_name);
         virtual ~AlarmMgr();
 
         // Check alarm list, emit signal if alarm active
         void check_alarms();
 
         // Set an alarm manually.
-        void set_alarm(std::string alarmid, tm* alarm_time);
+        void set_alarm(std::string alarmid, tm* alarm_time, tm* start_date, tm* stop_date);
 
         // Emit signal to deactivate an alarm
         void deactivate_alarm(std::string alarmid, bool snooze);
@@ -34,6 +36,7 @@ class AlarmMgr
     protected:
         type_signal_alarm m_signal_alarm_activated;
         type_signal_alarm m_signal_alarm_deactivated;
+        sqlite::connection alarmdb;
 };
 
 #endif
