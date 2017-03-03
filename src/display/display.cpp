@@ -32,14 +32,13 @@ bool Display::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     struct tm * timeinfo = localtime (&rawtime);
 
     char timestr[80];
-    strftime(timestr,80,"%a %b %d %r",timeinfo);
+    strftime(timestr,80,"%a %b %d\n%r",timeinfo);
 
     // Draw the time on the display
     cr->set_source_rgb(1.0, 1.0, 1.0);
     draw_text(cr, rectangle_width, rectangle_height, timestr);
     return true;
 }
-
 
 bool Display::on_timeout()
 {
