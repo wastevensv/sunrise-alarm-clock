@@ -31,6 +31,6 @@ int main(int argc, char* argv[])
             std::cout << "ALARM" << std::endl;
             alarm_mgr.deactivate_alarm(active_alarm, true);
         }
-        sleep(60);
+        sleep(5);
     }
 }

@@ -37,6 +37,7 @@ class AlarmMgr
         type_signal_alarm m_signal_alarm_activated;
         type_signal_alarm m_signal_alarm_deactivated;
         sqlite::connection alarmdb;
+        enum class col_names{id=0, series_name, dow, hr, min, start_date, stop_date, last_run};
 };
 
 #endif
