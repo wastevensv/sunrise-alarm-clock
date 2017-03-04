@@ -1,6 +1,11 @@
 # sunrise-alarm-clock
 Alarm clock designed to gently wake at the proper time.
 
+## Dependencies
+* gtkmm
+* vsqlitepp
+    * vsqlitepp depends on libboost
+
 ## Bonus: emulate-pi.sh
 Emulates a Raspberry Pi using qemu and a chroot.
 
