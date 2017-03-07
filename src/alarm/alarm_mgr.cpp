@@ -41,10 +41,10 @@ void AlarmMgr::check_alarms()
     boost::shared_ptr<sqlite::result> result = q.get_result();
     while(result->next_row())
     {
-        if( now->tm_wday == result->get_int((int)col_names::dow) &&
-            now->tm_hour == result->get_int((int)col_names::hr)  &&
-            now->tm_min  == result->get_int((int)col_names::min)
-          )
+        if( (result->get_int((int)col_names::dow) == now->tm_wday || // If the alarm is for this day
+             result->get_int((int)col_names::dow) == -1) && // Or every day
+             result->get_int((int)col_names::hr)  == now->tm_hour  && // and for this hour
+             result->get_int((int)col_names::min) == now->tm_min) // and for this minute
         {
             // Activate alarm.
             m_signal_alarm_activated.emit(result->get_string((int)col_names::series_name));
