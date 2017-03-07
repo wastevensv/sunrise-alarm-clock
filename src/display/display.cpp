@@ -4,9 +4,17 @@
 #include <glibmm/main.h>
 #include "display.h"
 
-Display::Display()
+Display::Display() : alarm_mgr("display_alarms.db")
 {
-    Glib::signal_timeout().connect( sigc::mem_fun(*this, &Display::on_timeout), 1000 );
+    add_events(Gdk::KEY_PRESS_MASK);
+    set_can_focus();
+
+    Glib::signal_timeout().connect(
+            sigc::mem_fun(*this, &Display::on_timeout), 1000 );
+    alarm_mgr.signal_alarm_activated().connect(
+            sigc::mem_fun(*this, &Display::on_alarm_activated));
+    alarm_mgr.signal_alarm_deactivated().connect(
+            sigc::mem_fun(*this, &Display::on_alarm_deactivated));
 }
 
 Display::~Display()
@@ -36,7 +44,17 @@ bool Display::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
     // Draw the time on the display
     cr->set_source_rgb(1.0, 1.0, 1.0);
-    draw_text(cr, rectangle_width, rectangle_height, timestr);
+    draw_main_text(cr, rectangle_width, rectangle_height, timestr);
+
+    if(active_alarm.empty())
+    {
+        draw_text(cr, rectangle_width, rectangle_height, 0,0, "No alarm.");
+    }
+    else
+    {
+        draw_text(cr, rectangle_width, rectangle_height, 0,0, "Alarm: " + active_alarm);
+    }
+
     return true;
 }
 
@@ -50,9 +68,28 @@ bool Display::on_timeout()
                 get_allocation().get_height());
         win->invalidate_rect(r, false);
     }
+    alarm_mgr.check_alarms();
     return true;
 }
 
+bool Display::on_key_press_event(GdkEventKey* key_event)
+{
+    alarm_mgr.deactivate_alarm();
+    return true;
+}
+
+
+void Display::on_alarm_activated(std::string alarmid)
+{
+    std::cout << "Alarm " << alarmid  << " activated." << std::endl;
+    active_alarm = alarmid;
+}
+
+void Display::on_alarm_deactivated(std::string alarmid)
+{
+    std::cout << "Alarm " << alarmid  << " deactivated." << std::endl;
+    active_alarm = "";
+}
 
 void Display::draw_rectangle(const Cairo::RefPtr<Cairo::Context>& cr,
         int width, int height)
@@ -61,7 +98,7 @@ void Display::draw_rectangle(const Cairo::RefPtr<Cairo::Context>& cr,
     cr->fill();
 }
 
-void Display::draw_text(const Cairo::RefPtr<Cairo::Context>& cr,
+void Display::draw_main_text(const Cairo::RefPtr<Cairo::Context>& cr,
         int rectangle_width, int rectangle_height,
         Glib::ustring text)
 {
@@ -84,6 +121,28 @@ void Display::draw_text(const Cairo::RefPtr<Cairo::Context>& cr,
 
     // Position the text in the middle
     cr->move_to((rectangle_width-text_width)/2, (rectangle_height-text_height)/2);
+
+    layout->show_in_cairo_context(cr);
+}
+
+void Display::draw_text(const Cairo::RefPtr<Cairo::Context>& cr,
+        int rectangle_width, int rectangle_height,
+        int xpos, int ypos,
+        Glib::ustring text)
+{
+    // http://developer.gnome.org/pangomm/unstable/classPango_1_1FontDescription.html
+    Pango::FontDescription font;
+
+    //  font.set_family("Monospace");
+    font.set_weight(Pango::WEIGHT_BOLD);
+
+    // http://developer.gnome.org/pangomm/unstable/classPango_1_1Layout.html
+    auto layout = create_pango_layout(text);
+
+    layout->set_font_description(font);
+
+    // Position the text in the middle
+    cr->move_to(xpos, ypos);
 
     layout->show_in_cairo_context(cr);
 }
