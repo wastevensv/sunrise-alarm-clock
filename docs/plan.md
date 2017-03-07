@@ -26,7 +26,6 @@
 ## Plan of Action
 ### Phase 0: Design
 * Draw block diagram
-* Make BOM
 
 ### Phase 1: Bare Necessities
 * Display NTP synced time graphically
@@ -39,7 +38,11 @@
 * Set a daily repeating alarm
 * Set a weekly repeating alarm
 
+### Phase 3.5: Slight Detour
+* Alarm Management CLI Utility
+
 ### Phase 4: A Bright Idea
+* Make BOM
 * Assemble Hardware
 * Make sunrise lights
 * Trigger sunrise on alarm
