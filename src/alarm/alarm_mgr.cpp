@@ -60,8 +60,8 @@ void AlarmMgr::check_alarms()
 
 void AlarmMgr::set_alarm(std::string alarmid, tm* alarm_time, tm* start_date, tm* stop_date) {
     // Convert start and stop times to unix timestamps.
-    time_t start_time = mktime(start_date);
-    time_t stop_time = mktime(stop_date);
+    int32_t start_time = mktime(start_date);
+    int32_t stop_time = mktime(stop_date);
 
     sqlite::execute ins(alarmdb, "INSERT INTO alarms VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
     // Insert columns are 1-indexed. Querys are 0-indexed.
