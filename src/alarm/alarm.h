@@ -17,7 +17,7 @@ class AlarmMgr
         void check_alarms();
 
         // Set an alarm manually.
-        void set_alarm(std::string alarmid, tm* alarm_time, tm* start_date, tm* stop_date);
+        void set_alarm(std::string alarmid, int dow, tm* alarm_time, tm* start_date, tm* stop_date);
 
         // Emit signal to deactivate an alarm
         void deactivate_alarm(std::string alarmid, bool snooze);
