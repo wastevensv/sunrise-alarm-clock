@@ -74,7 +74,9 @@ bool Display::on_timeout()
 
 bool Display::on_key_press_event(GdkEventKey* key_event)
 {
-    alarm_mgr.deactivate_alarm();
+    if(key_event->keyval==GDK_KEY_space) {
+        alarm_mgr.deactivate_alarm();
+    }
     return true;
 }
 
@@ -87,7 +89,6 @@ void Display::on_alarm_activated(std::string alarmid)
 
 void Display::on_alarm_deactivated(std::string alarmid)
 {
-    std::cout << "Alarm " << alarmid  << " deactivated." << std::endl;
     active_alarm = "";
 }
 
