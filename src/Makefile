@@ -1,8 +1,8 @@
 SUNRISE_BIN=sunrise
-SUNRISE_SRC=sunrise.cpp display/display.cpp alarm/alarm_mgr.cpp
+SUNRISE_SRC=sunrise.cpp display/display.cpp alarm/alarm.cpp
 
 MKALARM_BIN=mkalarm
-MKALARM_SRC=mkalarm.cpp alarm/alarm_mgr.cpp
+MKALARM_SRC=mkalarm.cpp alarm/alarm.cpp
 
 CPPFLAGS=-std=c++11 -ggdb
 VSQLITEFLAGS=-lvsqlitepp

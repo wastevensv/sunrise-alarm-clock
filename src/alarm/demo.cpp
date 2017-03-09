@@ -1,4 +1,4 @@
-#include "alarm_mgr.h"
+#include "alarm.h"
 
 #include <iostream>
 #include <unistd.h>

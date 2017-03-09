@@ -1,5 +1,5 @@
 TARGET=alarm_demo
-SOURCES=demo.cpp alarm_mgr.cpp
+SOURCES=demo.cpp alarm.cpp
 CPPFLAGS=-std=c++11 -ggdb
 VSQLITEFLAGS=-lvsqlitepp
 

@@ -4,7 +4,7 @@
 #include <gtkmm/drawingarea.h>
 #include <string>
 #include <iostream>
-#include "../alarm/alarm_mgr.h"
+#include "../alarm/alarm.h"
 
 class Display : public Gtk::DrawingArea
 {
