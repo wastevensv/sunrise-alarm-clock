@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
 
     struct tm alarm_time;
     if(!strptime(argv[1], "%H:%M", &alarm_time) || input.optionExists("-h")) {
-        std::cerr << "Usage: " << argv[0] << " HH:MM [-d W] [-n id] [-b YYYY-MM-DD] [-e YYYY-MM-DD]" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " HH:MM [-d W] [-n id] [-b YYYY-MM-DD] [-e YYYY-MM-DD] [-db filename]" << std::endl;
         std::cerr << "HH:MM         | Alarm time" << std::endl;
         std::cerr << "-d W          | Alarm weekday (Sunday or Sun)" << std::endl;
         std::cerr << "-n id         | Alarm id" << std::endl;
@@ -65,7 +65,6 @@ int main(int argc, char* argv[]) {
         std::cerr << "-e YYYY-MM-DD | Alarm end date" << std::endl;
         return -2;
     }
-
 
     std::string dow_str = input.getOption("-d");
     WeekDay dow;
@@ -96,6 +95,11 @@ int main(int argc, char* argv[]) {
         time_t endtime = INT_MAX;
         stop_date = *localtime(&endtime);
     }
+
+    std::string db_filename = input.getOption("-db");
+    if(db_filename.empty()) db_filename = "alarm.db";
+    AlarmMgr alarm_mgr(db_filename);
+    alarm_mgr.set_alarm(alarmid, (int)dow, &alarm_time, &start_date, &stop_date);
 
     std::cout << alarmid << ' ' << wdtostr(dow) << ' ';
 
