@@ -18,7 +18,7 @@ ${MKALARM_BIN}: $(MKALARM_SRC:.cpp=.o)
 	g++ $^ -o $@ ${VSQLITEFLAGS} `pkg-config sigc++-2.0 --libs`
 
 %.o: %.cpp
-	g++ -c ${CPPFLAGS} $< -o $@ `pkg-config gtkmm-3.0 --cflags` `pkg-config sigc++-2.0 --cflags`
+	g++ -c ${CPPFLAGS} $< -o $@ `pkg-config gtkmm-3.0 --cflags`
 
 clean:
 	rm -f ${SUNRISE_BIN} ${MKALARM_BIN}
