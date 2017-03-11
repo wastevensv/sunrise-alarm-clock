@@ -1,12 +1,18 @@
-TARGET=alarm_demo
-SOURCES=demo.cpp alarm.cpp
+DEMO_BIN=alarm_demo
+DEMO_SRC=demo.cpp alarm.cpp
+
 CPPFLAGS=-std=c++11 -ggdb
 VSQLITEFLAGS=-lvsqlitepp
 
-all: ${TARGET}
+.PHONY: all clean
 
-${TARGET}: ${SOURCES}
-	g++ ${CPPFLAGS} ${SOURCES} -o ${TARGET} `pkg-config gtkmm-3.0 --cflags --libs` ${VSQLITEFLAGS}
+all: ${DEMO_BIN}
+
+${DEMO_BIN}: $(DEMO_SRC:.cpp=.o)
+	g++ $^ -o $@ ${VSQLITEFLAGS} `pkg-config sigc++-2.0 --libs`
+
+%.o: %.cpp
+	g++ -c ${CPPFLAGS} $< -o $@ `pkg-config sigc++-2.0 --cflags`
 
 clean:
 	rm -f ${TARGET}
