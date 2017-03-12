@@ -1,3 +1,4 @@
+CC?=g++
 SUNRISE_BIN=sunrise
 SUNRISE_SRC=sunrise.cpp display/display.cpp alarm/alarm.cpp
 
@@ -12,13 +13,13 @@ VSQLITEFLAGS=-lvsqlitepp
 all: ${SUNRISE_BIN} ${MKALARM_BIN}
 
 ${SUNRISE_BIN}: $(SUNRISE_SRC:.cpp=.o)
-	g++ $^ -o $@ ${VSQLITEFLAGS} `pkg-config gtkmm-3.0 --libs`
+	${CC} $^ -o $@ ${VSQLITEFLAGS} `pkg-config gtkmm-3.0 --libs`
 
 ${MKALARM_BIN}: $(MKALARM_SRC:.cpp=.o)
-	g++ $^ -o $@ ${VSQLITEFLAGS} `pkg-config sigc++-2.0 --libs`
+	${CC} $^ -o $@ ${VSQLITEFLAGS} `pkg-config sigc++-2.0 --libs`
 
 %.o: %.cpp
-	g++ -c ${CPPFLAGS} $< -o $@ `pkg-config gtkmm-3.0 --cflags`
+	${CC} -c ${CPPFLAGS} $< -o $@ `pkg-config gtkmm-3.0 --cflags`
 
 clean:
 	rm -f ${SUNRISE_BIN} ${MKALARM_BIN}

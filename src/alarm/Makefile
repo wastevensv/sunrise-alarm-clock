@@ -1,3 +1,4 @@
+CC?=g++
 DEMO_BIN=alarm_demo
 DEMO_SRC=demo.cpp alarm.cpp
 
@@ -9,10 +10,10 @@ VSQLITEFLAGS=-lvsqlitepp
 all: ${DEMO_BIN}
 
 ${DEMO_BIN}: $(DEMO_SRC:.cpp=.o)
-	g++ $^ -o $@ ${VSQLITEFLAGS} `pkg-config sigc++-2.0 --libs`
+	${CC} $^ -o $@ ${VSQLITEFLAGS} `pkg-config sigc++-2.0 --libs`
 
 %.o: %.cpp
-	g++ -c ${CPPFLAGS} $< -o $@ `pkg-config sigc++-2.0 --cflags`
+	${CC} -c ${CPPFLAGS} $< -o $@ `pkg-config sigc++-2.0 --cflags`
 
 clean:
 	rm -f ${TARGET}
