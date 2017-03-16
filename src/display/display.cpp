@@ -30,9 +30,18 @@ bool Display::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     const int rectangle_width = width;
     const int rectangle_height = height;
 
-    // Draw a black rectangle
-    cr->set_source_rgb(0.0, 0.0, 0.0);
-    draw_rectangle(cr, rectangle_width, rectangle_height);
+    if(active_alarm.empty())
+    {
+        // Draw a black rectangle
+        cr->set_source_rgb(0.0, 0.0, 0.0);
+        draw_rectangle(cr, rectangle_width, rectangle_height);
+    }
+    else
+    {
+        // Draw a red rectangle
+        cr->set_source_rgb(1.0, 0.0, 0.0);
+        draw_rectangle(cr, rectangle_width, rectangle_height);
+    }
 
     // Get the time.
     time_t rawtime;
