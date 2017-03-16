@@ -18,6 +18,9 @@ if [ "$1" == "mount" ]; then
     sed -i 's/^\([^#]\)/#\1/g' $MOUNTPT/etc/ld.so.preload
     cp /usr/bin/qemu-arm-static $MOUNTPT/usr/bin/
 elif [ "$1" == "enter" ]; then
+    if [ ! -d $MOUNTPT ]; then
+        $0 mount || exit -2
+    fi
     cd $MOUNTPT/ || exit -2
     chroot . bin/bash
 elif [ "$1" == "unmount" ]; then
