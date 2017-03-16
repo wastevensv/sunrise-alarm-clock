@@ -35,7 +35,21 @@ elif [ "$1" == "unmount" ]; then
         >&2 echo Not mounted.
         exit -2
     fi
+elif [ "$1" == "qemu-prep" ]; then
+    mkdir $MOUNTPT || exit -2
+    mount $IMG -o loop,offset=$((137216*512)),rw $MOUNTPT
+    sed -i 's/^\([^#]\)/#\1/g' $MOUNTPT/etc/ld.so.preload
+    sed -i 's/mmcblk0p/sda/g' $MOUNTPT/etc/fstab
+    umount $MOUNTPT
+    rmdir $MOUNTPT
+elif [ "$1" == "qemu-clean" ]; then
+    mkdir $MOUNTPT || exit -2
+    mount $IMG -o loop,offset=$((137216*512)),rw $MOUNTPT
+    sed -i 's/^#//g' $MOUNTPT/etc/ld.so.preload
+    sed -i 's/sda/mmcblk0p/g' $MOUNTPT/etc/fstab
+    umount $MOUNTPT
+    rmdir $MOUNTPT
 else
-    >&2 echo "Usage: $0 [mount|enter|unmount]"
+    >&2 echo "Usage: $0 [mount|enter|unmount|qemu-prep|qemu-clean]"
     exit -3
 fi
