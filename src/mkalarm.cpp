@@ -23,7 +23,7 @@ const std::string wdtostr(WeekDay wd) {
         case WED:
             return "Wednesday";
         case THU:
-            return "Sunday";
+            return "Thursday";
         case FRI:
             return "Friday";
         case SAT:
