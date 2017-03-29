@@ -83,8 +83,13 @@ bool Display::on_timeout()
 
 bool Display::on_key_press_event(GdkEventKey* key_event)
 {
-    if(key_event->keyval==GDK_KEY_space) {
+    if(key_event->keyval==GDK_KEY_space)
+    {
         alarm_mgr.deactivate_alarm();
+    }
+    else if (key_event->keyval == GDK_KEY_Escape)
+    {
+        gtk_main_quit();
     }
     return true;
 }

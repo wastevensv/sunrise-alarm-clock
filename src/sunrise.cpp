@@ -4,7 +4,7 @@
 int main(int argc, char* argv[])
 {
 
-    Glib::OptionContext options("Sunrise Alarm Clock");
+    Glib::OptionContext options("");
     options.set_help_enabled();
 
     Glib::OptionGroup group("sunrise", "Sunrise");
